@@ -1,33 +1,55 @@
-# Template CV ATS-Friendly
+# cv\_template
 
-Template LaTeX untuk Curriculum Vitae (CV) atau resume satu halaman yang rapi, modern, dan ramah ATS (Applicant Tracking System). Dibangun dengan struktur modular, font sans-serif, dan tata letak yang bersih.
+Template LaTeX untuk CV atau resume satu halaman yang dirancang agar tetap terbaca oleh sistem ATS (Applicant Tracking System). Tata letak mengutamakan keterbacaan teks dengan tipografi sans-serif yang konsisten tanpa elemen dekoratif yang mengganggu parser.
 
 ---
 
-## Persyaratan Sistem
+## Persyaratan
 
-- **LaTeX distribution**: TeX Live 2020+ atau MiKTeX
-- **Compiler**: `xelatex` (wajib, karena menggunakan font sistem)
-- **Font**: TeX Gyre Heros (akan terinstall otomatis bersama TeX Live / MiKTeX)
+- Distribusi LaTeX: **TeX Live 2020+** atau **MiKTeX**
+- Perintah **`xelatex`** tersedia di `$PATH`
+- Font **TeX Gyre Heros** (sudah termasuk dalam TeX Live dan MiKTeX)
+- Opsional: **Overleaf** (kompatibel, pastikan compiler diatur ke XeLaTeX)
+
+---
+
+## Struktur Proyek
+
+```
+cv_template/
+├── fig/
+│   └── me.png              # Foto portrait rasio 3:4
+├── sections/
+│   ├── header.tex           # Foto, nama, kontak, ringkasan
+│   ├── education.tex        # Riwayat pendidikan
+│   ├── experience.tex       # Pengalaman kerja
+│   ├── organizations.tex    # Pengalaman organisasi dan kepanitiaan
+│   ├── certifications.tex   # Sertifikasi dan pelatihan
+│   └── skills.tex           # Keahlian teknis, soft skills, bahasa
+├── info.tex                 # Data pribadi (nama, email, telepon, dll.)
+├── main.tex                 # Berkas utama; edit hanya untuk menambah/menghapus seksi
+├── preamble.tex             # Konfigurasi paket, font, dan perintah kustom
+└── README.md
+```
 
 ---
 
 ## Cara Menggunakan
 
-### 1. Clone atau salin folder ini
+### 1. Unduh proyek
 
 ```bash
-cp -r CV_Template/ CV_Saya/
-cd CV_Saya
+git clone https://github.com/Caseinn/cv_template.git
+cd cv_template
 ```
 
 ### 2. Isi data pribadi
 
-Edit `info.tex` — ganti dengan data Anda:
+Buka `info.tex` dan ubah nilainya:
 
 ```tex
-\newcommand{\myname}{Nama Lengkap}
-\newcommand{\myemail}{email.anda@gmail.com}
+\newcommand{\myname}{Nama Anda}
+\newcommand{\myemail}{email.anda@example.com}
 \newcommand{\myphone}{+62812-XXXX-XXXX}
 \newcommand{\mylinkedin}{linkedin.com/in/nama-anda}
 \newcommand{\mywebsite}{portfolioanda.web.id}
@@ -35,58 +57,46 @@ Edit `info.tex` — ganti dengan data Anda:
 
 ### 3. Siapkan foto
 
-Letakkan foto 3:4 portrait di `fig/me.png`. Rekomendasi: 1107×1476 pixel, latar belakang profesional.
+Letakkan foto dengan rasio 3:4 (rekomendasi: 1107×1476 piksel) di `fig/me.png`. Template akan menampilkan foto dengan lebar 0,9 inci.
 
-Tidak punya foto? Hapus saja file `fig/me.png` — template otomatis menampilkan placeholder abu-abu.
+Jika tidak memiliki foto, cukup hapus file `fig/me.png`. Template akan menampilkan placeholder abu-abu sebagai gantinya.
 
 ### 4. Edit konten setiap seksi
 
-| File | Seksi |
-|------|-------|
-| `sections/header.tex` | Ringkasan profesional (summary) |
-| `sections/education.tex` | Riwayat pendidikan |
-| `sections/experience.tex` | Pengalaman kerja |
-| `sections/organizations.tex` | Organisasi dan kepanitiaan |
-| `sections/certifications.tex` | Sertifikasi dan pelatihan |
-| `sections/skills.tex` | Keahlian teknis, soft skills, bahasa |
+Setiap file di folder `sections/` berisi satu seksi lengkap dengan instruksi dan contoh. Ganti teks placeholder dengan data Anda sendiri.
 
 ### 5. Kompilasi
 
+Jalankan perintah berikut di terminal:
+
 ```bash
 xelatex main.tex
-xelatex main.tex   # jalankan dua kali untuk menyelesaikan referensi
+xelatex main.tex
 ```
 
-Hasil: `main.pdf`
-
----
-
-## Struktur File
-
-```
-CV_Template/
-├── fig/
-│   └── me.png              # Foto 3:4 (placeholder otomatis jika tidak ada)
-├── sections/
-│   ├── header.tex           # Header: foto, nama, kontak, summary
-│   ├── education.tex        # Pendidikan
-│   ├── experience.tex       # Pengalaman kerja
-│   ├── organizations.tex    # Organisasi & event
-│   ├── certifications.tex   # Sertifikasi
-│   └── skills.tex           # Keahlian
-├── info.tex                 # Data pribadi (nama, email, dll)
-├── main.tex                 # Entry point (jangan diubah)
-├── preamble.tex             # Package & style (jangan diubah)
-└── README.md                # Dokumen ini
-```
+Hasil kompilasi adalah `main.pdf`.
 
 ---
 
 ## Kustomisasi
 
-### Mengganti font
+### Data pribadi
 
-Edit `preamble.tex`:
+Semua data pribadi didefinisikan di `info.tex`. Cukup ubah nilainya di satu tempat, dan seluruh dokumen akan menyesuaikan.
+
+### Warna tautan
+
+Warna hyperlink diatur di `preamble.tex`:
+
+```tex
+\definecolor{linkblue}{HTML}{0055A0}
+```
+
+Ganti kode hex dengan warna yang diinginkan.
+
+### Font
+
+Template menggunakan TeX Gyre Heros secara default. Untuk menggantinya:
 
 ```tex
 \setmainfont{Nama Font}[
@@ -95,82 +105,68 @@ Edit `preamble.tex`:
 ]
 ```
 
-### Mengubah warna link
+Pastikan font yang digunakan terinstal di sistem.
 
-Edit `preamble.tex`:
+### Margin
 
-```tex
-\definecolor{linkblue}{HTML}{0055A0}   % Ganti kode hex sesuai keinginan
-```
-
-### Mengatur margin
-
-Edit `preamble.tex`:
+Ukuran margin diatur melalui opsi paket `geometry`:
 
 ```tex
 \usepackage[top=0.7in, bottom=0.7in, left=0.75in, right=0.75in]{geometry}
 ```
 
-### Menambah/menghapus seksi
+### Urutan seksi
 
-Edit `main.tex` — tambah atau hapus baris `\input{sections/...}`:
+Buka `main.tex` untuk menambah, menghapus, atau mengubah urutan seksi:
 
 ```tex
 \begin{document}
 \input{sections/header}
 \input{sections/education}
 \input{sections/experience}
-%\input{sections/organizations}    % nonaktifkan jika tidak perlu
+%\input{sections/organizations}
 \input{sections/certifications}
 \input{sections/skills}
 \end{document}
 ```
 
----
-
-## Command yang Tersedia
-
-| Command | Fungsi | Contoh |
-|---------|--------|--------|
-| `\entry{org}{tgl}{role}` | Entry 3 baris: organisasi (kiri) + tanggal (kanan), lalu peran (miring) | `\entry{PT ABC}{Jan 2024 -- Des 2024}{Intern}` |
-| `\entryline{kiri}{kanan}` | Entry 1 baris: teks kiri + teks kanan | `\entryline{Sertifikat XYZ -- Provider}{Jan 2024}` |
-| `\entrycert{judul}{prov}{tgl}` | Entry 2 baris: judul bold, lalu provider (kiri) + tanggal (kanan) | `\entrycert{\href{url}{Judul}}{Provider}{Jan 2024}` |
-| `\bul{teks}` | Poin bullet dengan hanging indent | `\bul{Mengembangkan fitur X menggunakan Y.}` |
+Cukup beri tanda komentar (`%`) pada baris yang tidak diinginkan, atau tambahkan baris `\input` baru untuk seksi tambahan.
 
 ---
 
-## Best Practice
+## Kompilasi
 
-### Ringkasan (Summary)
-- 2-3 kalimat, 30-50 kata total
-- Kalimat 1: Siapa Anda (jurusan, bidang, keahlian utama)
-- Kalimat 2: Apa yang Anda kerjakan (tools, domain, teknologi)
-- Kalimat 3: Soft skills atau gaya bekerja
+### Lokal (TeX Live / MiKTeX)
 
-### Pengalaman Kerja
-- Urutkan kronologis terbalik (terbaru di atas)
-- 2-4 bullet per entry, masing-masing 10-20 kata
-- Gunakan kata kerja aktif: Mengembangkan, Membangun, Merancang, Mengoptimalkan
-- Kuantifikasi bila mungkin (persen, pengguna, waktu)
-- Fokus pada pencapaian, bukan sekadar tanggung jawab
+```bash
+xelatex main.tex
+xelatex main.tex
+```
 
-### Pendidikan
-- GPA dicantumkan jika 3.00+/4.00
-- Skripsi: beri hyperlink jika tersedia online
-- Maksimal 1 bullet poin
+Disarankan menjalankan dua kali agar referensi dan metadata PDF terbentuk dengan benar.
 
-### Sertifikasi
-- Cantumkan 4-8 sertifikasi paling relevan
-- Utamakan yang memiliki URL verifikasi
-- Gunakan `\entrycert` untuk format 2 baris (judul bold, provider + tanggal)
+### Overleaf
 
-### Keahlian
-- Hard Skills: 5-10 teknologi/alat yang relevan
-- Soft Skills: 3-5 kemampuan interpersonal
-- Bahasa: sertakan tingkat kemahiran dalam tanda kurung
-- Jujur — hanya cantumkan yang bisa dijelaskan saat wawancara
+1. Unggah seluruh folder proyek ke Overleaf.
+2. Atur compiler ke **XeLaTeX** (Menu → Compiler → XeLaTeX).
+3. Klik Recompile.
 
-### Organisasi
-- 1-2 bullet per entry
-- Fokus pada kontribusi nyata, bukan deskripsi organisasi
-- Bisa dihapus jika pengalaman kerja sudah cukup memenuhi halaman
+---
+
+## Tips
+
+- Ringkasan profesional cukup 2–3 kalimat (30–50 kata). Jelaskan siapa Anda, bidang yang ditekuni, dan nilai yang ditawarkan.
+- Setiap entri pengalaman kerja sebaiknya memiliki 2–4 butir poin. Fokus pada pencapaian, bukan hanya daftar tanggung jawab.
+- Gunakan kata kerja aktif seperti "Mengembangkan", "Membangun", "Merancang", atau "Mengoptimalkan".
+- Cantumkan IPK jika di atas 3.00 dari skala 4.00.
+- Cantumkan 4–8 sertifikasi yang paling relevan. Utamakan yang memiliki URL verifikasi.
+- Untuk keahlian, tulis 5–10 teknologi untuk hard skills, 3–5 untuk soft skills. Hanya cantumkan yang benar-benar Anda kuasai.
+- Jika pengalaman kerja sudah cukup memenuhi satu halaman, seksi organisasi bisa dihapus.
+
+---
+
+## Kontribusi
+
+Jika Anda menemukan bug atau memiliki saran perbaikan, silakan buka *issue* di repositori GitHub. *Pull request* juga sangat diterima.
+
+---
