@@ -1,0 +1,39 @@
+% ----------------------------------------------------------------------
+% HEADER — name, photo, contact line, summary
+% ----------------------------------------------------------------------
+% Best practices:
+% - Summary: 2-3 sentences, 30-50 words total
+%   Sentence 1: Who you are (degree, field, key expertise)
+%   Sentence 2: What you do (technical interests, tools, domains)
+%   Sentence 3: What you bring (soft skills, work style, goals)
+% - Photo: 3:4 portrait ratio (e.g., 1107x1476px), professional
+%   If no fig/me.png exists, a gray placeholder box is shown
+% ----------------------------------------------------------------------
+\noindent
+\begin{minipage}[b]{2.3cm}
+	\raggedright%
+	\IfFileExists{fig/me.png}
+	{\includegraphics[width=0.9in]{fig/me.png}}
+	{\color{gray!20}\rule{0.9in}{1.2in}\par\vspace{0.3em}{\tiny\color{gray}3:4 photo}\color{black}}
+\end{minipage}%
+\hspace{0.5cm}
+\begin{minipage}[b]{\dimexpr\textwidth-2.3cm-0.5cm\relax}
+	{\fontsize{26}{32}\bfseries\uppercase{\myname}\par}
+	\vspace{0.15em}
+	{\small
+		\href{mailto:\myemail}{\myemail}
+		\hspace{0.8em}$|$\hspace{0.8em}
+		\myphone
+		\hspace{0.8em}$|$\hspace{0.8em}
+		\href{https://\mylinkedin}{\mylinkedin}
+		\hspace{0.8em}$|$\hspace{0.8em}
+		\href{https://\mywebsite}{\mywebsite}
+	}
+	\vspace{1em}\par
+	\small
+	% TODO: Write a 2-3 sentence professional summary (30-50 words total)
+	Your professional summary goes here. Highlight your degree, key interests,
+	and what you bring to the table. Keep it concise and impactful.
+\end{minipage}
+
+\vspace{0.1em}
